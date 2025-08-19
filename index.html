@@ -1,0 +1,1151 @@
+<html lang="en" class="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Time Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for better dark mode aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937; /* gray-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563; /* gray-600 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; /* gray-500 */
+        }
+        /* Style for the number inputs to be less intrusive */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /* Styling for drag-and-drop */
+        .task-item.dragging {
+            opacity: 0.5;
+            background: #374151; /* gray-700 */
+        }
+        .drag-over {
+            border-top: 2px solid #22d3ee; /* cyan-400 */
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-2{margin-top:0.5rem}.mt-6{margin-top:1.5rem}.mt-3{margin-top:0.75rem}.ml-4{margin-left:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-6{height:1.5rem}.h-2\.5{height:0.625rem}.w-6{width:1.5rem}.w-full{width:100%}.w-16{width:4rem}.max-w-7xl{max-width:80rem}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.cursor-move{cursor:move}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded-full{border-radius:9999px}.rounded{border-radius:0.25rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-gray-600{--tw-border-opacity:1;border-color:rgb(75 85 99 / var(--tw-border-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-cyan-600{--tw-bg-opacity:1;background-color:rgb(8 145 178 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-green-600{--tw-bg-opacity:1;background-color:rgb(22 163 74 / var(--tw-bg-opacity, 1))}.bg-cyan-500{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.bg-gray-600{--tw-bg-opacity:1;background-color:rgb(75 85 99 / var(--tw-bg-opacity, 1))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.pb-4{padding-bottom:1rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-gray-200{--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-lime-400{--tw-text-opacity:1;color:rgb(163 230 53 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-cyan-500{--tw-text-opacity:1;color:rgb(6 182 212 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-cyan-700:hover{--tw-bg-opacity:1;background-color:rgb(14 116 144 / var(--tw-bg-opacity, 1))}.hover\:bg-green-700:hover{--tw-bg-opacity:1;background-color:rgb(21 128 61 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-700:hover{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.hover\:text-gray-300:hover{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.focus\:bg-gray-700:focus{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.focus\:ring-1:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-cyan-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(6 182 212 / var(--tw-ring-opacity, 1))}.focus\:ring-cyan-600:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(8 145 178 / var(--tw-ring-opacity, 1))}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:mb-8{margin-bottom:2rem}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:gap-6{gap:1.5rem}.md\:p-6{padding:1.5rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:p-8{padding:2rem}}</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-4{margin-left:1rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-6{margin-top:1.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-2\.5{height:0.625rem}.h-6{height:1.5rem}.w-16{width:4rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-7xl{max-width:80rem}.flex-grow{flex-grow:1}.cursor-move{cursor:move}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-gray-600{--tw-border-opacity:1;border-color:rgb(75 85 99 / var(--tw-border-opacity, 1))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-cyan-500{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.bg-cyan-600{--tw-bg-opacity:1;background-color:rgb(8 145 178 / var(--tw-bg-opacity, 1))}.bg-gray-600{--tw-bg-opacity:1;background-color:rgb(75 85 99 / var(--tw-bg-opacity, 1))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.bg-green-600{--tw-bg-opacity:1;background-color:rgb(22 163 74 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-4{padding-bottom:1rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-cyan-500{--tw-text-opacity:1;color:rgb(6 182 212 / var(--tw-text-opacity, 1))}.text-gray-200{--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-lime-400{--tw-text-opacity:1;color:rgb(163 230 53 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-cyan-700:hover{--tw-bg-opacity:1;background-color:rgb(14 116 144 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-700:hover{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.hover\:bg-green-700:hover{--tw-bg-opacity:1;background-color:rgb(21 128 61 / var(--tw-bg-opacity, 1))}.hover\:text-gray-300:hover{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.focus\:bg-gray-700:focus{--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.focus\:ring-1:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-cyan-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(6 182 212 / var(--tw-ring-opacity, 1))}.focus\:ring-cyan-600:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(8 145 178 / var(--tw-ring-opacity, 1))}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:mb-8{margin-bottom:2rem}.md\:mt-0{margin-top:0px}.md\:w-auto{width:auto}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:gap-6{gap:1.5rem}.md\:p-6{padding:1.5rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:p-8{padding:2rem}}</style></head>
+<body class="bg-gray-900 text-gray-200 font-sans antialiased">
+
+    <div id="app" class="container mx-auto p-4 md:p-6 lg:p-8 max-w-7xl">
+
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 border-b border-gray-700 pb-4">
+            <h1 id="header-title" class="text-3xl md:text-4xl font-bold text-cyan-400 mb-4 md:mb-0">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                 <button id="save-app-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                    Save App
+                </button>
+                <button id="export-csv-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                    Export to CSV
+                </button>
+                <button id="back-to-dashboard-btn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 hidden">
+                    ← Back to Dashboard
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main>
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="">
+                <!-- Global Time Counters -->
+                <section id="global-counters" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+                        <h2 class="text-lg font-semibold text-gray-400 mb-2">Total Lab Time Left This Semester</h2>
+                        <p id="total-lab-time" class="text-3xl md:text-4xl font-mono font-bold text-amber-400">178 hours</p>
+                        <p class="text-xs text-gray-500 mt-2">Based on schedule until Dec 11, 2025</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+                        <h2 class="text-lg font-semibold text-gray-400 mb-2">Time To Complete All Projects</h2>
+                        <p id="total-project-time" class="text-3xl md:text-4xl font-mono font-bold text-lime-400">178.0 hours</p>
+                         <p class="text-xs text-gray-500 mt-2">Sum of all incomplete tasks</p>
+                    </div>
+                </section>
+
+                <!-- Project List -->
+                <section id="project-list-container">
+                    <h2 class="text-2xl font-bold mb-4 text-cyan-400">Projects</h2>
+                    <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"><div class="bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-all duration-300" data-project-id="proj-1">
+                            <h3 class="text-xl font-bold text-cyan-400 mb-2">U-bend Die</h3>
+                            <p class="text-gray-400 mb-4">10 of 10 tasks remaining</p>
+                            <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p class="text-sm text-gray-300 mt-3 pt-3 border-t border-gray-700">Number: <span class="font-semibold text-cyan-300">12</span></p>
+                        </div><div class="bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-all duration-300" data-project-id="proj-2">
+                            <h3 class="text-xl font-bold text-cyan-400 mb-2">Rectangular Die</h3>
+                            <p class="text-gray-400 mb-4">5 of 5 tasks remaining</p>
+                            <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            
+                        </div><div class="bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-all duration-300" data-project-id="proj-3">
+                            <h3 class="text-xl font-bold text-cyan-400 mb-2">Round Die</h3>
+                            <p class="text-gray-400 mb-4">7 of 7 tasks remaining</p>
+                            <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            
+                        </div><div class="bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-all duration-300" data-project-id="proj-4">
+                            <h3 class="text-xl font-bold text-cyan-400 mb-2">Parts Tray Die</h3>
+                            <p class="text-gray-400 mb-4">12 of 12 tasks remaining</p>
+                            <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            
+                        </div><div class="bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-all duration-300" data-project-id="proj-5">
+                            <h3 class="text-xl font-bold text-cyan-400 mb-2">Washer Die</h3>
+                            <p class="text-gray-400 mb-4">15 of 15 tasks remaining</p>
+                            <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p class="text-sm text-gray-300 mt-3 pt-3 border-t border-gray-700">Size: <span class="font-semibold text-cyan-300">.625</span></p>
+                        </div></div>
+                </section>
+            </div>
+
+            <!-- Project Detail View -->
+            <div id="project-view" class="hidden">
+                <section id="project-detail-header" class="bg-gray-800 p-6 rounded-xl shadow-lg mb-6 md:mb-8">
+                    <h2 id="project-name" class="text-3xl font-bold text-cyan-400 mb-2">Round Die</h2>
+                    <p class="text-lg font-semibold text-gray-400 mb-2">Time For This Project</p>
+                    <p id="project-time-left" class="text-4xl font-mono font-bold text-lime-400">21.8 hours</p>
+                </section>
+
+                <section id="task-list-container">
+                     <h3 class="text-2xl font-bold mb-4 text-cyan-400">Tasks</h3>
+                    <div id="task-list" class="space-y-4"><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-301" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-301" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Locate and Cut Stock" data-project-id="proj-3" data-task-id="task-301" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="Band saw" data-project-id="proj-3" data-task-id="task-301" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="1" data-project-id="proj-3" data-task-id="task-301" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="30" data-project-id="proj-3" data-task-id="task-301" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-301">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-303" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-303" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Turn Upper Die Half" data-project-id="proj-3" data-task-id="task-303" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="Lathe" data-project-id="proj-3" data-task-id="task-303" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="5" data-project-id="proj-3" data-task-id="task-303" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="0" data-project-id="proj-3" data-task-id="task-303" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-303">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-302" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-302" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Turn Lower Button" data-project-id="proj-3" data-task-id="task-302" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="Lathe" data-project-id="proj-3" data-task-id="task-302" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="5" data-project-id="proj-3" data-task-id="task-302" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="0" data-project-id="proj-3" data-task-id="task-302" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-302">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-304" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-304" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Assemble and Test" data-project-id="proj-3" data-task-id="task-304" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="Hand tools, Grinder" data-project-id="proj-3" data-task-id="task-304" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="2" data-project-id="proj-3" data-task-id="task-304" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="0" data-project-id="proj-3" data-task-id="task-304" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-304">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-1755630256094" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-1755630256094" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Run on Press" data-project-id="proj-3" data-task-id="task-1755630256094" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="Press" data-project-id="proj-3" data-task-id="task-1755630256094" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="1" data-project-id="proj-3" data-task-id="task-1755630256094" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="0" data-project-id="proj-3" data-task-id="task-1755630256094" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-1755630256094">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-1755630608494" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-1755630608494" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Hand In " data-project-id="proj-3" data-task-id="task-1755630608494" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="Instructor" data-project-id="proj-3" data-task-id="task-1755630608494" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="0" data-project-id="proj-3" data-task-id="task-1755630608494" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="15" data-project-id="proj-3" data-task-id="task-1755630608494" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-1755630608494">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div><div class="task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4" data-task-id="task-1755630836174" draggable="true">
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="proj-3" data-task-id="task-1755630836174" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer">
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="Make Fixes" data-project-id="proj-3" data-task-id="task-1755630836174" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 " placeholder="New Task Name">
+                                    <input type="text" value="" data-project-id="proj-3" data-task-id="task-1755630836174" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="8" data-project-id="proj-3" data-task-id="task-1755630836174" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="0" data-project-id="proj-3" data-task-id="task-1755630836174" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="proj-3" data-task-id="task-1755630836174">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div></div>
+                    <button id="add-task-btn" class="mt-6 w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        Add New Task
+                    </button>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- INITIAL DATA STRUCTURE ---
+            const initialData = {
+    "projects": [
+        {
+            "id": "proj-1",
+            "name": "U-bend Die",
+            "tasks": [
+                {
+                    "id": "task-100",
+                    "name": "Determine U-bend Number",
+                    "materials": "",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 15,
+                    "completed": false,
+                    "customInput": {
+                        "type": "text",
+                        "value": "12",
+                        "placeholder": "Enter assigned number"
+                    }
+                },
+                {
+                    "id": "task-101",
+                    "name": "Locate and Cut Stock",
+                    "materials": "Band saw",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-102",
+                    "name": "Layout and plan/program to make Lower Die",
+                    "materials": "Computer for G&M code",
+                    "estimatedHours": 3,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-103",
+                    "name": "Machine Lower Die Half",
+                    "materials": "Mill, CNC Mill",
+                    "estimatedHours": 4,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-104",
+                    "name": "Layout and plan/program to make Upper Die",
+                    "materials": "Computer for G&M code",
+                    "estimatedHours": 3,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-105",
+                    "name": "Machine Upper Die Half",
+                    "materials": "Mill, CNC Mill",
+                    "estimatedHours": 4,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-106",
+                    "name": "Make or Locate Stock Strips",
+                    "materials": "Shear",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-107",
+                    "name": "Run Part on Brake Press",
+                    "materials": "Brake press, Instructor",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-108",
+                    "name": "Adjustments/Fixes",
+                    "materials": "Computer, machine, and/or tools as needed",
+                    "estimatedHours": 4,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-109",
+                    "name": "Hand-in Project",
+                    "materials": "Submit the completed U-Bend Die project.",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                }
+            ]
+        },
+        {
+            "id": "proj-2",
+            "name": "Rectangular Die",
+            "tasks": [
+                {
+                    "id": "task-201",
+                    "name": "Locate and Cut Stock",
+                    "materials": "Band saw",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-202",
+                    "name": "Machine Lower Die Half",
+                    "materials": "Mill",
+                    "estimatedHours": 6,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-203",
+                    "name": "Machine Upper Die Half",
+                    "materials": "Mill",
+                    "estimatedHours": 6,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-204",
+                    "name": "Assemble and Test",
+                    "materials": "Hand tools",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630185292",
+                    "name": "Run on Press",
+                    "materials": "Press",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                }
+            ]
+        },
+        {
+            "id": "proj-3",
+            "name": "Round Die",
+            "tasks": [
+                {
+                    "id": "task-301",
+                    "name": "Locate and Cut Stock",
+                    "materials": "Band saw",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-303",
+                    "name": "Turn Upper Die Half",
+                    "materials": "Lathe",
+                    "estimatedHours": 5,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-302",
+                    "name": "Turn Lower Button",
+                    "materials": "Lathe",
+                    "estimatedHours": 5,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-304",
+                    "name": "Assemble and Test",
+                    "materials": "Hand tools, Grinder",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630256094",
+                    "name": "Run on Press",
+                    "materials": "Press",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630608494",
+                    "name": "Hand In ",
+                    "materials": "Instructor",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 15,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630836174",
+                    "name": "Make Fixes",
+                    "materials": "",
+                    "estimatedHours": 7,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                }
+            ]
+        },
+        {
+            "id": "proj-4",
+            "name": "Parts Tray Die",
+            "tasks": [
+                {
+                    "id": "task-401",
+                    "name": "Locate and Cut Stock",
+                    "materials": "Shear",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-402",
+                    "name": "Program Layout Die Ring",
+                    "materials": "Computer",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630330194",
+                    "name": "Machine Die Ring",
+                    "materials": "Lathe",
+                    "estimatedHours": 4,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-403",
+                    "name": "Program Lay out Form Punch",
+                    "materials": "Computer",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630395754",
+                    "name": "Machine Form Punch",
+                    "materials": "Lathe",
+                    "estimatedHours": 20,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630414588",
+                    "name": "Program Layout Hybrid Punch",
+                    "materials": "Computer",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630434584",
+                    "name": "Machine Hybrid Punch",
+                    "materials": "Lathe",
+                    "estimatedHours": 4,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-404",
+                    "name": "Grind Parts",
+                    "materials": "Grinder",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630485242",
+                    "name": "Assembly and Fit",
+                    "materials": "Hand Tools",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630502734",
+                    "name": "Run on Press",
+                    "materials": "Press",
+                    "estimatedHours": 2,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630512748",
+                    "name": "Fix issues",
+                    "materials": "",
+                    "estimatedHours": 12,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-1755630518850",
+                    "name": "Hand In",
+                    "materials": "Instructor",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 15,
+                    "completed": false
+                }
+            ]
+        },
+        {
+            "id": "proj-5",
+            "name": "Washer Die",
+            "tasks": [
+                {
+                    "id": "task-501",
+                    "name": "Determine Washer Size",
+                    "materials": "",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 30,
+                    "completed": false,
+                    "customInput": {
+                        "type": "text",
+                        "value": ".625",
+                        "placeholder": "Enter assigned size"
+                    }
+                },
+                {
+                    "id": "task-504",
+                    "name": "Locate Die Set",
+                    "materials": "",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 45,
+                    "completed": false
+                },
+                {
+                    "id": "task-502",
+                    "name": "Determine Stock Size",
+                    "materials": "",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-503",
+                    "name": "Cut Stock",
+                    "materials": "",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-505",
+                    "name": "Check Design and Die Set Compatibility",
+                    "materials": "",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-506",
+                    "name": "Refer to PDF to Double-Check",
+                    "materials": "",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-507",
+                    "name": "Design Die Assembly",
+                    "materials": "",
+                    "estimatedHours": 8,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-508",
+                    "name": "Program Parts",
+                    "materials": "",
+                    "estimatedHours": 20,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-509",
+                    "name": "Machine Parts",
+                    "materials": "",
+                    "estimatedHours": 12,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-510",
+                    "name": "Assemble and Fit the Die",
+                    "materials": "",
+                    "estimatedHours": 4,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-512",
+                    "name": "Find or Make Stock Strips",
+                    "materials": "",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                },
+                {
+                    "id": "task-511",
+                    "name": "Run the Die",
+                    "materials": "",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-513",
+                    "name": "Make Fixes",
+                    "materials": "",
+                    "estimatedHours": 10,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-514",
+                    "name": "Run the Die Again",
+                    "materials": "",
+                    "estimatedHours": 1,
+                    "estimatedMinutes": 0,
+                    "completed": false
+                },
+                {
+                    "id": "task-515",
+                    "name": "Turn in Project",
+                    "materials": "",
+                    "estimatedHours": 0,
+                    "estimatedMinutes": 30,
+                    "completed": false
+                }
+            ]
+        }
+    ]
+};
+
+            // --- APPLICATION STATE & DOM ELEMENTS ---
+            const app = {
+                state: {},
+                currentProjectId: null,
+                dom: {
+                    dashboardView: document.getElementById('dashboard-view'),
+                    projectView: document.getElementById('project-view'),
+                    headerTitle: document.getElementById('header-title'),
+                    backBtn: document.getElementById('back-to-dashboard-btn'),
+                    exportBtn: document.getElementById('export-csv-btn'),
+                    saveAppBtn: document.getElementById('save-app-btn'),
+                    projectList: document.getElementById('project-list'),
+                    projectName: document.getElementById('project-name'),
+                    taskList: document.getElementById('task-list'),
+                    addTaskBtn: document.getElementById('add-task-btn'),
+                    // Counters
+                    totalLabTimeEl: document.getElementById('total-lab-time'),
+                    totalProjectTimeEl: document.getElementById('total-project-time'),
+                    projectTimeLeftEl: document.getElementById('project-time-left'),
+                },
+                timers: {
+                    mainInterval: null,
+                    totalLabTimeRemaining: 0,
+                    totalProjectTimeRemaining: 0,
+                    currentProjectTimeRemaining: 0,
+                },
+
+                // --- INITIALIZATION ---
+                init() {
+                    this.loadData();
+                    this.renderDashboard();
+                    this.attachEventListeners();
+                    this.calculateAndStartTimers();
+                },
+
+                // --- DATA MANAGEMENT ---
+                loadData() {
+                    const savedData = localStorage.getItem('projectTrackerData');
+                    if (savedData) {
+                        this.state = JSON.parse(savedData);
+                    } else {
+                        this.state = initialData;
+                        this.saveData();
+                    }
+                },
+                saveData() {
+                    localStorage.setItem('projectTrackerData', JSON.stringify(this.state));
+                },
+
+                // --- NAVIGATION ---
+                showDashboard() {
+                    this.currentProjectId = null;
+                    this.dom.dashboardView.classList.remove('hidden');
+                    this.dom.projectView.classList.add('hidden');
+                    this.dom.backBtn.classList.add('hidden');
+                    this.dom.headerTitle.textContent = 'Dashboard';
+                },
+                showProject(projectId) {
+                    this.currentProjectId = projectId;
+                    this.dom.dashboardView.classList.add('hidden');
+                    this.dom.projectView.classList.remove('hidden');
+                    this.dom.backBtn.classList.remove('hidden');
+                    this.renderProject(projectId);
+                },
+
+                // --- RENDERING ---
+                renderDashboard() {
+                    this.dom.projectList.innerHTML = '';
+                    this.state.projects.forEach(project => {
+                        const incompleteTasks = project.tasks.filter(t => !t.completed).length;
+                        const totalTasks = project.tasks.length;
+                        const progress = totalTasks > 0 ? ((totalTasks - incompleteTasks) / totalTasks) * 100 : 0;
+
+                        let projectSpecificHTML = '';
+                        if (project.id === 'proj-5') { // Washer Die
+                            const washerSizeTask = project.tasks.find(t => t.id === 'task-501');
+                            const sizeValue = washerSizeTask?.customInput?.value;
+                            if (sizeValue) {
+                                projectSpecificHTML = `<p class="text-sm text-gray-300 mt-3 pt-3 border-t border-gray-700">Size: <span class="font-semibold text-cyan-300">${sizeValue}</span></p>`;
+                            } else {
+                                projectSpecificHTML = `<p class="text-sm text-gray-500 mt-3 pt-3 border-t border-gray-700">Size: Not set</p>`;
+                            }
+                        } else if (project.id === 'proj-1') { // U-bend Die
+                            const uBendNumberTask = project.tasks.find(t => t.id === 'task-100');
+                            const numberValue = uBendNumberTask?.customInput?.value;
+                            if (numberValue) {
+                                projectSpecificHTML = `<p class="text-sm text-gray-300 mt-3 pt-3 border-t border-gray-700">Number: <span class="font-semibold text-cyan-300">${numberValue}</span></p>`;
+                            } else {
+                                projectSpecificHTML = `<p class="text-sm text-gray-500 mt-3 pt-3 border-t border-gray-700">Number: Not set</p>`;
+                            }
+                        }
+
+                        const projectCard = document.createElement('div');
+                        projectCard.className = 'bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:bg-gray-700 hover:scale-105 transition-all duration-300';
+                        projectCard.dataset.projectId = project.id;
+                        projectCard.innerHTML = `
+                            <h3 class="text-xl font-bold text-cyan-400 mb-2">${project.name}</h3>
+                            <p class="text-gray-400 mb-4">${incompleteTasks} of ${totalTasks} tasks remaining</p>
+                            <div class="w-full bg-gray-600 rounded-full h-2.5">
+                                <div class="bg-cyan-500 h-2.5 rounded-full" style="width: ${progress}%"></div>
+                            </div>
+                            ${projectSpecificHTML}
+                        `;
+                        this.dom.projectList.appendChild(projectCard);
+                    });
+                },
+                renderProject(projectId) {
+                    const project = this.state.projects.find(p => p.id === projectId);
+                    if (!project) {
+                        this.showDashboard();
+                        return;
+                    }
+                    this.dom.headerTitle.textContent = project.name;
+                    this.dom.projectName.textContent = project.name;
+                    this.dom.taskList.innerHTML = '';
+
+                    project.tasks.forEach(task => {
+                        const taskItem = document.createElement('div');
+                        taskItem.className = 'task-item bg-gray-800 p-4 rounded-lg flex items-center gap-4';
+                        taskItem.dataset.taskId = task.id;
+                        taskItem.draggable = true;
+                        
+                        const customInputHTML = task.customInput ? `
+                            <input type="${task.customInput.type}" data-project-id="${project.id}" data-task-id="${task.id}" data-input-type="custom" value="${task.customInput.value || ''}" placeholder="${task.customInput.placeholder}" class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm w-full md:w-auto mt-2 md:mt-0">
+                        ` : '';
+
+                        taskItem.innerHTML = `
+                            <div class="drag-handle cursor-move text-gray-500 hover:text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                            </div>
+                            <div class="flex items-center flex-grow">
+                                <input type="checkbox" data-project-id="${project.id}" data-task-id="${task.id}" class="h-6 w-6 rounded bg-gray-700 border-gray-600 text-cyan-500 focus:ring-cyan-600 cursor-pointer" ${task.completed ? 'checked' : ''}>
+                                <div class="ml-4 flex-grow">
+                                    <input type="text" value="${task.name}" data-project-id="${project.id}" data-task-id="${task.id}" data-input-type="name" class="bg-transparent font-semibold w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1 ${task.completed ? 'line-through text-gray-500' : ''}" placeholder="New Task Name">
+                                    <input type="text" value="${task.materials || ''}" data-project-id="${project.id}" data-task-id="${task.id}" data-input-type="materials" class="bg-transparent text-sm text-gray-400 w-full focus:bg-gray-700 focus:ring-1 focus:ring-cyan-500 rounded px-1" placeholder="Materials">
+                                    ${customInputHTML}
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" min="0" value="${task.estimatedHours}" data-project-id="${project.id}" data-task-id="${task.id}" data-input-type="hours" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">h</span>
+                                <input type="number" min="0" max="59" value="${task.estimatedMinutes}" data-project-id="${project.id}" data-task-id="${task.id}" data-input-type="minutes" class="w-16 bg-gray-700 border border-gray-600 rounded px-2 py-1 text-center font-mono">
+                                <span class="font-mono text-gray-400">m</span>
+                            </div>
+                            <button class="delete-task-btn text-gray-500 hover:text-red-500" data-project-id="${project.id}" data-task-id="${task.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            </button>
+                        `;
+                        this.dom.taskList.appendChild(taskItem);
+                    });
+                    this.updateProjectTimeCounter(projectId);
+                },
+
+                // --- TIME CALCULATIONS & TIMERS ---
+                calculateAndStartTimers() {
+                    this.timers.totalLabTimeRemaining = this.calculateRemainingLabTime();
+                    this.timers.totalProjectTimeRemaining = this.calculateTotalProjectTime();
+                    
+                    if (this.timers.mainInterval) clearInterval(this.timers.mainInterval);
+                    this.timers.mainInterval = setInterval(() => this.updateAllCounters(), 1000);
+                },
+                calculateRemainingLabTime() {
+                    const semesterStart = new Date('2025-08-20T00:00:00');
+                    const semesterEnd = new Date('2025-12-11T23:59:59');
+                    const now = new Date();
+
+                    if (now > semesterEnd) return 0;
+                    const start = now < semesterStart ? semesterStart : now;
+
+                    const holidays = ['2025-09-01', '2025-11-26', '2025-11-27', '2025-11-28'];
+                    let totalMinutes = 0;
+                    const labDurationMinutes = (2 * 60) + 50;
+
+                    for (let d = new Date(start); d <= semesterEnd; d.setDate(d.getDate() + 1)) {
+                        const dayOfWeek = d.getDay();
+                        const dateString = d.toISOString().split('T')[0];
+                        if (holidays.includes(dateString)) continue;
+                        if (dayOfWeek >= 1 && dayOfWeek <= 4) totalMinutes += labDurationMinutes;
+                    }
+                    return totalMinutes * 60 * 1000;
+                },
+                calculateTotalProjectTime(projectId = null) {
+                    let totalMinutes = 0;
+                    const projectsToScan = projectId 
+                        ? [this.state.projects.find(p => p.id === projectId)]
+                        : this.state.projects;
+
+                    projectsToScan.forEach(project => {
+                        if (!project) return;
+                        project.tasks.forEach(task => {
+                            if (!task.completed) {
+                                totalMinutes += (parseInt(task.estimatedHours, 10) || 0) * 60 + (parseInt(task.estimatedMinutes, 10) || 0);
+                            }
+                        });
+                    });
+                    return totalMinutes * 60 * 1000;
+                },
+                updateAllCounters() {
+                    if (this.timers.totalLabTimeRemaining > 0) this.timers.totalLabTimeRemaining -= 1000;
+                    
+                    this.dom.totalLabTimeEl.textContent = this.formatTime(this.timers.totalLabTimeRemaining);
+                    this.dom.totalProjectTimeEl.textContent = this.formatStaticSum(this.timers.totalProjectTimeRemaining);
+                    
+                    if (!this.dom.projectView.classList.contains('hidden')) {
+                        this.dom.projectTimeLeftEl.textContent = this.formatStaticSum(this.timers.currentProjectTimeRemaining);
+                    }
+                },
+                updateProjectTimeCounter(projectId) {
+                    this.timers.currentProjectTimeRemaining = this.calculateTotalProjectTime(projectId);
+                },
+                formatTime(ms) {
+                    if (ms < 0) ms = 0;
+                    const totalHours = Math.floor(ms / (1000 * 60 * 60));
+                    return `${totalHours} hours`;
+                },
+                formatStaticSum(ms) {
+                    if (ms <= 0) return '0 hours';
+                    const totalMinutes = Math.floor(ms / (1000 * 60));
+                    const hours = (totalMinutes / 60).toFixed(1);
+                    return `${hours} hours`;
+                },
+
+                // --- EVENT HANDLING ---
+                attachEventListeners() {
+                    // Navigation
+                    this.dom.backBtn.addEventListener('click', () => this.showDashboard());
+                    this.dom.projectList.addEventListener('click', (e) => {
+                        const card = e.target.closest('[data-project-id]');
+                        if (card) this.showProject(card.dataset.projectId);
+                    });
+
+                    // Header buttons
+                    this.dom.saveAppBtn.addEventListener('click', () => this.saveAppAsHTML());
+                    this.dom.exportBtn.addEventListener('click', () => this.exportToCSV());
+
+                    // Add Task Button
+                    this.dom.addTaskBtn.addEventListener('click', () => {
+                        if (!this.currentProjectId) return;
+                        const project = this.state.projects.find(p => p.id === this.currentProjectId);
+                        project.tasks.push({
+                            id: 'task-' + Date.now(),
+                            name: '',
+                            materials: '',
+                            estimatedHours: 0,
+                            estimatedMinutes: 0,
+                            completed: false
+                        });
+                        this.saveData();
+                        this.renderProject(this.currentProjectId);
+                        this.updateAllCounters();
+                    });
+
+                    // Task interactions (delegated)
+                    this.dom.taskList.addEventListener('input', (e) => this.handleTaskUpdate(e.target));
+                    this.dom.taskList.addEventListener('change', (e) => this.handleTaskUpdate(e.target));
+                    this.dom.taskList.addEventListener('click', (e) => {
+                        const deleteBtn = e.target.closest('.delete-task-btn');
+                        if (deleteBtn) {
+                            const { projectId, taskId } = deleteBtn.dataset;
+                            const project = this.state.projects.find(p => p.id === projectId);
+                            project.tasks = project.tasks.filter(t => t.id !== taskId);
+                            this.saveData();
+                            this.renderProject(projectId);
+                            this.updateOnTaskChange(projectId);
+                        }
+                    });
+
+                    // Drag and Drop
+                    this.dom.taskList.addEventListener('dragstart', (e) => {
+                        if (e.target.classList.contains('task-item')) {
+                             e.target.classList.add('dragging');
+                        }
+                    });
+                    this.dom.taskList.addEventListener('dragend', (e) => {
+                         if (e.target.classList.contains('task-item')) {
+                            e.target.classList.remove('dragging');
+                         }
+                    });
+                    this.dom.taskList.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        const afterElement = this.getDragAfterElement(this.dom.taskList, e.clientY);
+                        const dragging = this.dom.taskList.querySelector('.dragging');
+                        if (dragging) {
+                            this.dom.taskList.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                            if (afterElement) afterElement.classList.add('drag-over');
+                        }
+                    });
+                    this.dom.taskList.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        this.dom.taskList.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+                        const dragging = this.dom.taskList.querySelector('.dragging');
+                        if (!dragging || !this.currentProjectId) return;
+
+                        const afterElement = this.getDragAfterElement(this.dom.taskList, e.clientY);
+                        const project = this.state.projects.find(p => p.id === this.currentProjectId);
+                        const draggedTaskId = dragging.dataset.taskId;
+                        const targetTaskId = afterElement ? afterElement.dataset.taskId : null;
+
+                        const taskIndex = project.tasks.findIndex(t => t.id === draggedTaskId);
+                        const [removedTask] = project.tasks.splice(taskIndex, 1);
+
+                        if (targetTaskId) {
+                            const targetIndex = project.tasks.findIndex(t => t.id === targetTaskId);
+                            project.tasks.splice(targetIndex, 0, removedTask);
+                        } else {
+                            project.tasks.push(removedTask);
+                        }
+
+                        this.saveData();
+                        this.renderProject(this.currentProjectId);
+                    });
+                },
+
+                getDragAfterElement(container, y) {
+                    const draggableElements = [...container.querySelectorAll('.task-item:not(.dragging)')];
+                    return draggableElements.reduce((closest, child) => {
+                        const box = child.getBoundingClientRect();
+                        const offset = y - box.top - box.height / 2;
+                        if (offset < 0 && offset > closest.offset) {
+                            return { offset: offset, element: child };
+                        } else {
+                            return closest;
+                        }
+                    }, { offset: Number.NEGATIVE_INFINITY }).element;
+                },
+
+                handleTaskUpdate(target) {
+                    const { projectId, taskId, inputType } = target.dataset;
+                    if (!projectId || !taskId) return;
+
+                    const project = this.state.projects.find(p => p.id === projectId);
+                    const task = project.tasks.find(t => t.id === taskId);
+                    
+                    if (target.type === 'checkbox') task.completed = target.checked;
+                    else if (target.type === 'number') {
+                        const value = parseInt(target.value, 10) || 0;
+                        if (inputType === 'hours') task.estimatedHours = value;
+                        if (inputType === 'minutes') task.estimatedMinutes = Math.min(59, value);
+                    } else if (target.type === 'text') {
+                        if (inputType === 'name') task.name = target.value;
+                        if (inputType === 'materials') task.materials = target.value;
+                        if (inputType === 'custom') task.customInput.value = target.value;
+                    } else {
+                        return;
+                    }
+
+                    this.saveData();
+                    this.updateOnTaskChange(projectId);
+                },
+
+                updateOnTaskChange(projectId) {
+                    this.renderDashboard();
+                    this.timers.totalProjectTimeRemaining = this.calculateTotalProjectTime();
+                    this.updateProjectTimeCounter(projectId);
+                    this.updateAllCounters();
+                },
+                
+                // --- EXPORT & SAVE FUNCTIONALITY ---
+                exportToCSV() {
+                    let csvContent = "data:text/csv;charset=utf-8,";
+                    const headers = ["Project", "Task", "Materials", "Estimated Hours", "Estimated Minutes", "Status", "Custom Input"];
+                    csvContent += headers.join(",") + "\r\n";
+
+                    this.state.projects.forEach(project => {
+                        project.tasks.forEach(task => {
+                            const row = [
+                                `"${project.name}"`, `"${task.name}"`, `"${task.materials || ''}"`,
+                                task.estimatedHours, task.estimatedMinutes,
+                                task.completed ? "Completed" : "In Progress",
+                                `"${task.customInput ? task.customInput.value : ''}"`
+                            ];
+                            csvContent += row.join(",") + "\r\n";
+                        });
+                    });
+                    
+                    csvContent += "\r\nSummary Counters\r\nCounter,Time Remaining/Total\r\n";
+                    csvContent += `Total Lab Time Left,${this.dom.totalLabTimeEl.textContent}\r\n`;
+                    csvContent += `Time To Complete All Projects,${this.dom.totalProjectTimeEl.textContent}\r\n`;
+
+                    const encodedUri = encodeURI(csvContent);
+                    const link = document.createElement("a");
+                    link.setAttribute("href", encodedUri);
+                    link.setAttribute("download", "project_data_export.csv");
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                },
+
+                saveAppAsHTML() {
+                    // Get the current state of the entire HTML document
+                    const currentHtml = document.documentElement.outerHTML;
+
+                    // Get the current application data and format it as a JSON string
+                    // This will replace the original 'initialData' in the saved file
+                    const currentStateJSON = JSON.stringify(this.state, null, 4);
+                    const replacementString = `const initialData = ${currentStateJSON};`;
+
+                    // Use a regular expression to find and replace the original initialData object
+                    const newHtml = currentHtml.replace(/const initialData = \{[\s\S]*?\};/, replacementString);
+
+                    // Create a Blob, which is a file-like object of immutable, raw data
+                    const blob = new Blob([newHtml], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+
+                    // Create a temporary link to trigger the download
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'project-tracker-save.html';
+                    document.body.appendChild(link);
+                    link.click();
+
+                    // Clean up by removing the link and revoking the object URL
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }
+            };
+
+            // Start the application
+            app.init();
+        });
+    </script>
+
+
+</body></html>
